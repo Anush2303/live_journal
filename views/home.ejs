@@ -1,0 +1,40 @@
+
+<%- include("partials/header"); -%>
+    <h1 class="startheading" style=" color:#1abc9c;">HEY BLOGGERS !</h1>
+    <p class="start typewriter"> <%= startingContent %> </p>
+    <p class="start typewriter"> <%= startingContent1 %> </p>
+    <p class="start typewriter"> <%= startingContent2 %> </p>
+<% posts.forEach(function(post){ %>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="startheading" style="color:#1abc9c;"><%=post.title%></h1>
+        <h4 style="color:#1abc9c;">BY~ <%=post.pname%></h4>
+        <p class="start">
+        <%=post.content.substring(0, 100) + " ..."%>
+        <a href="/posts/<%=post._id%>" style="color:#1abc9c;"><span style="font-size: 13px;">Read More</span></a>
+        <button  class="del" style="float:right; font-size:10px; padding:7px;" datadoc="<%=post._id%>">DELETE BLOG</button>
+        </p>
+      </div>
+    </div>
+<% }) %>
+<%- include("partials/footer"); -%>
+<script>
+  const trashcan=document.getElementsByClassName('del');
+  console.log(trashcan);
+   for(var i=0;i<trashcan.length;i++){
+    const id=trashcan[i].getAttribute("datadoc")
+    console.log(trashcan[i].getAttribute("datadoc"));
+    trashcan[i].addEventListener('click',(e)=>{
+    const endpoint=`/posts/${id}`;
+    //console.log(trashcan.dataset.doc, "trashcan");
+    fetch(endpoint,{
+      method:'DELETE'
+    })
+    .then((res)=>res.json())
+    .then((data)=>console.log(data), location.reload())
+    .catch(err=> console.log(err));
+   })
+    
+  }
+</script>
+

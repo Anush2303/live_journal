@@ -1,0 +1,18 @@
+
+<%- include("partials/header"); -%>
+<% items.forEach(function(item){ %>
+    <div class="card">
+      <div class="card-body">
+        <h1 class="startheading" style="color:#1abc9c;"><%=item.title%></h1>
+        <p class="start">
+        <%=item.description%>
+        </p>
+        <img  style="height:50%; width:50%; border-radius: 5%;"src="<%=item.urlToImage%>"/>
+        <div style="display: flex; flex-direction: row; justify-content: space-between; padding-top: 9px;">
+        <a class="btna" style="padding: 5px;"href="<%=item.url%>">Read Full News here</a>
+        <a class="btna" style="padding: 5px;"href="/compose">POST YOUR VIEWS</a>
+        </div>
+      </div>
+    </div>
+<% }) %>
+<%- include("partials/footer"); -%>
